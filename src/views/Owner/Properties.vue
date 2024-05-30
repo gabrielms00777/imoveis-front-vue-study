@@ -3,9 +3,11 @@
       
       <div class="flex justify-between items-center mb-4">
         <h2 class="text-2xl font-bold text-gray-800 mb-4">Meus Imóveis</h2>
-        <button class="bg-green-500 hover:bg-green-600 text-white font-bold py-2 px-4 rounded">
-          Cadastrar Novo Imóvel
-        </button>
+        <router-link :to="{name: 'createProperty'}">
+          <button class="bg-green-500 hover:bg-green-600 text-white font-bold py-2 px-4 rounded">
+            Cadastrar Novo Imóvel
+          </button>
+        </router-link>
       </div>
     
       <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">

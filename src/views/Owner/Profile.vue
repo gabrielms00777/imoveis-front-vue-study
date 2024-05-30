@@ -2,7 +2,7 @@
    <section class="bg-white rounded-md shadow-md p-6 w-4/5 ml-4">
       <h2 class="text-2xl font-bold text-gray-800 mb-4">Meu Perfil</h2>
     
-      <div class="flex items-center mb-4">
+      <!-- <div class="flex items-center mb-4">
         <div class="avatar avatar-lg">
           <img src="https://picsum.photos/300/200" alt="Foto do Proprietário" />
         </div>
@@ -10,12 +10,12 @@
           <h3 class="text-lg font-bold text-gray-800">João da Silva</h3>
           <p class="text-gray-600">joao.silva@email.com</p>
         </div>
-      </div>
+      </div> -->
     
       <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
         <div class="mb-4">
           <label class="block text-gray-700 font-bold mb-2">Nome Completo:</label>
-          <p class="text-gray-600">João da Silva</p>
+          <input type="text" value="João da Silva" id="name" name="name" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline">
         </div>
     
         <div class="mb-4">
@@ -64,4 +64,7 @@
     </section>
 </template>
 
-<script lang="ts" setup></script>
+<script lang="ts" setup>
+
+
+</script>
