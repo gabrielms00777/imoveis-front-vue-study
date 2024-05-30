@@ -2,7 +2,7 @@ import { createRouter, createWebHistory } from 'vue-router'
 import HomeLayout from '@/components/layouts/HomeLayout.vue'
 import TenantLayout from '@/components/layouts/TenantLayout.vue'
 import OwnerLayout from '@/components/layouts/OwnerLayout.vue'
-import { authGuard, ownerGuard, tenantGuard } from './routes'
+import { loginGuard, ownerGuard, tenantGuard } from './routes'
 
 function lazyLoad(view: string){
   return () => import(`../views/${view}.vue`)
@@ -39,11 +39,13 @@ const router = createRouter({
         {
           path: 'register',
           name: 'register',
+          beforeEnter: loginGuard,
           component: lazyLoad("Register")
         },
         {
           path: 'login',
           name: 'login',
+          beforeEnter: loginGuard,
           component: lazyLoad("Login")
         },
       ]
@@ -52,13 +54,10 @@ const router = createRouter({
       path: '/tenant',
       component: TenantLayout,
       beforeEnter: tenantGuard,
-      // meta: {
-      //   auth: true
-      // },
       children: [
         {
           path: '',
-          name: 'dashboard',
+          name: '',
           component: lazyLoadOwnerTenant("Dashboard")
         },
         {
@@ -102,9 +101,6 @@ const router = createRouter({
       path: '/owner',
       component: OwnerLayout,
       beforeEnter: ownerGuard,
-      // meta: {
-      //   auth: true
-      // },
       children: [
         {
           path: 'contracts',
@@ -112,6 +108,11 @@ const router = createRouter({
           component: lazyLoadOwner("Contracts")
           // component: lazyLoad("Owner/Contracts")
           // component: () => import(`../views/Owner/Contracts.vue`)
+        },
+        {
+          path: '',
+          name: 'ownerDashboard',
+          component: lazyLoadOwner("Dashboard")
         },
         {
           path: 'contracts/:id',
@@ -132,11 +133,6 @@ const router = createRouter({
           path: 'properties/:id',
           name: 'propertyDetails',
           component: lazyLoadOwner("PropertyDetails")
-        },
-        {
-          path: 'dashboard',
-          name: 'ownerDashboard',
-          component: lazyLoadOwner("Dashboard")
         },
         {
           path: 'messages',
@@ -173,6 +169,5 @@ const router = createRouter({
   ]
 })
 
-router.beforeEach(authGuard)
 
 export default router

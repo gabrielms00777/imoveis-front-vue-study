@@ -8,19 +8,20 @@ interface AuthUserState {
     user: {
         name: string | null,
         email: string | null,
-        type: 'tenant' | 'owner' | null;
+        type: 'tenant' | 'owner' | 'admin' | null;
     } | null,
     token: string | null
 }
 
 export const useAuthStore = defineStore('authUser', () => {
-    const user = ref<AuthUserState['user']>(null)
+    const user = ref<AuthUserState['user']>(JSON.parse(localStorage.getItem('user') ?? '{}') as AuthUserState['user'])
     const token = ref<AuthUserState['token']>(localStorage.getItem('token'))
     const isAuth = ref(false)
 
-    user.value = JSON.parse(localStorage.getItem('user') ?? '{}') as AuthUserState['user']
+    // user.value = JSON.parse(localStorage.getItem('user') ?? '{}') as AuthUserState['user']
 
     const setUser = (userValue: AuthUserState['user']) => {
+        // console.log(userValue)
         localStorage.setItem('user',JSON.stringify(userValue))
         user.value = userValue
     }

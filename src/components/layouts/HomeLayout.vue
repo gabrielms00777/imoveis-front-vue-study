@@ -10,7 +10,15 @@
               Encontre o imóvel ideal para você com facilidade e segurança.
             </p>
         </div>
-        <div class="flex">
+        <div class="flex" v-if="isAuth">
+          <button @click="redirectDashboard" class="px-4 py-2 bg-blue-500 text-white rounded-md ml-2">
+        Dashboard
+      </button>
+          <!-- <router-link to="/login">
+          </router-link> -->
+          
+        </div>
+        <div class="flex" v-else>
           <router-link to="/login">
             <button class="px-4 py-2 bg-blue-500 text-white rounded-md ml-2">
           Login
@@ -37,4 +45,20 @@
     </div>
   </footer>
 </template>
-<script setup lang="ts"></script>
+<script setup lang="ts">
+import { useAuthStore } from '@/stores/auth';
+import { useRouter } from 'vue-router';
+
+const router = useRouter()
+const auth = useAuthStore()
+
+const isAuth = !!auth.isAuthenticated
+
+const redirectDashboard = () => {
+  if(auth.user?.type == 'owner'){
+    return router.push('/owner')
+  }else if(auth.user?.type == 'tenant'){
+    return router.push('/tenant')
+  }
+}
+</script>

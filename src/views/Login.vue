@@ -36,22 +36,30 @@ const router = useRouter()
 const auth = useAuthStore()
 
 const user = reactive({
-    email: 'admin@admin',
-    password: 'admin'
+    email: 'ysawayn@example.org',
+    password: 'password'
 })
 
 const handleLogin = async () => {
     try {
         const {data} = await api.post('/login', user)
-        // console.log(data)
-        const userData = {name: data.name, email: user.email, type: 'owner'}
-        auth.setToken(data.token)
-        auth.setUser({name: data.name, email: user.email, type: 'owner'})
+        console.log(data.data)
+        auth.setToken(data.data.token)
+        auth.setUser({
+          name: data.data?.name,
+          email: user.email, 
+          type: data.data?.type
+        })
         auth.setIsAuth(true)
 
-        router.push({
-            name: 'ownerDashboard'
-        })
+        if(data.data.type == 'tenant'){
+          router.push('/tenant')
+        }else{
+          router.push('/owner')
+        }
+        // }else if(data.data.type == 'owner'){
+        //   router.push('/owner')
+        // }
 
 
     } catch (error) {

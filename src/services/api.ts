@@ -1,12 +1,12 @@
 import { useAuthStore } from '@/stores/auth'
 import axios from 'axios'
 
-const baseUrl = 'http://api-ronda.test/api'
+const baseUrl = 'http://localhost:8000/api'
 
 export const api = axios.create({
     baseURL: baseUrl,
     headers: {
-    'Content-type': 'application/json'
+        'Content-type': 'application/json'
     }
 })
 

@@ -17,7 +17,7 @@
 
   <ul class="flex flex-col space-y-2">
     <li class="mb-2">
-      <router-link to="/owner/dashboard" class="block py-2 px-4 rounded-md hover:bg-gray-700 active">Dashboard</router-link>
+      <router-link to="/owner" class="block py-2 px-4 rounded-md hover:bg-gray-700 active">Dashboard</router-link>
     </li>
     <li class="mb-2">
       <router-link to="/owner/profile" class="block py-2 px-4 rounded-md hover:bg-gray-700">Meu Perfil</router-link>
